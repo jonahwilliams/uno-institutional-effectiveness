@@ -1,0 +1,32 @@
+<div class="btn-group" dropdown is-open="status.isopeny">
+  <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+    Performance<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+    <li>
+      <a ng-click="params.ycol = 'schps'">
+        Average SCH per Student per AOI
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.ycol = 'grad4'">
+        Graduation Rate (4 year)
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.ycol = 'grad6'">
+       Graduation Rate (6 year)
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.ycol = 'degpts'">
+        Bachelor's Degrees per Thousand Students
+      </a>
+    </li>
+     <li>
+      <a ng-click="params.ycol = 'defrate'">
+        Student Loan Default Rate
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,36 @@
+{
+  "name": "node-js-getting-started",
+  "version": "0.1.4",
+  "description": "A web app created for UNO",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "angular-loading-bar": "*",
+    "body-parser": "^1.13.3",
+    "compression": "1.5.2",
+    "d3": "*",
+    "ejs": "^2.3.1",
+    "eslint": "^1.1.0",
+    "express": "~4.9.x",
+    "keen.io": "*",
+    "pg": "4.x"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-plugin-react": "^3.2.3"
+  }
+}

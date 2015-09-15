@@ -1,0 +1,89 @@
+{
+    "cols": {
+        "grad4": {
+            "u": "%",
+            "n": "Graduation Rate (4 year)",
+            "d": "4-year graduation rate reported for fall 2008 first-time full-time degree-seeking cohort as of August 31, 2014"
+        },
+        "grad6": {
+            "u": "%",
+            "n": "Graduation Rate (6 year)",
+            "d": "6-year graduation rate reported for fall 2008 first-time full-time degree-seeking cohort as of August 31, 2014"
+        },
+        "headcount": {
+            "u": "n",
+            "n": "Undergraduate Headcount",
+            "d": "Unduplicated 12 month undergraduate enrollment headcount reported for July 1, 2013-June 30, 2014 period."
+        },
+        "employees": {
+            "u": "n",
+            "n": "Employees",
+            "d": "Total staff (FT and PT) headcount reported as of November 1, 2013."
+        },
+        "instructors": {
+            "u": "n",
+            "n": "Instructors",
+            "d": "Total full-time instruction staff headcount"
+        },
+        "admins": {
+            "u": "n",
+            "n": "Admins",
+            "d": "Combined IPEDS Staff Survey full-time and part-time staff counts in staff categories: management occupations; business and financial operations occupations; computer, engineering, and science occupations; community service, legal, arts and media occupations; healthcare practitioners and technical occupations"
+        },
+        "totalsal": {
+            "u": "$",
+            "n": "Total Salary",
+            "d": "Salary data for full-time permanent staff on the institution payroll as of November 1, 2013."
+        },
+        "instsal": {
+            "u": "$",
+            "n": "Instructor Salary",
+            "d": "Total salary outlays on full-time instructional staff"
+        },
+        "adminsal": {
+            "u": "$",
+            "n": "Admin Salary",
+            "d": "Total salary outlays on administrative staff"
+        },
+        "bacdeg": {
+            "u": "n",
+            "n": "Bachelor's Degrees",
+            "d": "Total bachelor's degrees awarded by the institution"
+        },
+        "isalpm": {
+            "u": "n",
+            "n": "Instructor Salary per Million",
+            "d": "Computed instructor salary measure as total instructor salary / total salary outlays"
+        },
+        "asalpm": {
+            "u": "n",
+            "n": "Admin Salary per Million",
+            "d": "Computed admin salary measure as total admin salary / total salary outlays"
+        },
+        "degpts": {
+            "u": "n",
+            "n": "Degrees per Thousand Students",
+            "d": "Total bachelor's degrees awarded by the institution per thousand students"
+        },
+        "inspts": {
+            "u": "n",
+            "n": "Instructors per Thousand Students",
+            "d": "Computed institutional instructor size measure defined as 1000 * (instructor staff headcount/total student headcount)"
+        },
+        "adpts": {
+            "u": "n",
+            "n": "Admins per Thousand Students",
+            "d": "Computed institutional administrative staff size measure defined as (total administrative staff headcount/total student headcount)"
+        },
+        "defrate": {
+            "u": "%",
+            "n": "Loan Default Rate",
+            "d": "Average student loan default rate of students who took out loans for 2011, 2010, and 2009"
+        },
+        "schps": {
+            "u": "n",
+            "n": "Average SCH per Student per AOI",
+            "d": "Students Credit Hours per student for academic year 2013"
+        }
+    }
+}

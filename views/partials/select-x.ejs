@@ -1,0 +1,57 @@
+<div class="btn-group" dropdown is-open="status.isopenx">
+  <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+    Resource<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+    <li>
+      <a ng-click="params.xcol = 'employees'">
+        Employees
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'admins'">
+        Administration
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'instructors'">
+        Instructors
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'totalsal'">
+        Total Salary
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'adminsal'">
+        Admin Salary
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'instsal'">
+        Instructor Salary
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'asalpm'">
+        Administration Salary per Million
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'isalpm'">
+        Instructor Salary per Million
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'adpts'">
+        Admin per Thousand Students
+      </a>
+    </li>
+    <li>
+      <a ng-click="params.xcol = 'inspts'">
+        Instructors per Thousand Students
+      </a>
+    </li>
+  </ul>
+</div>
