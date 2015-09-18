@@ -1,6 +1,8 @@
 /* global myApp */
 myApp.controller('DataCtrl',
-  function($scope, $http, $filter, $anchorScroll, $location) {
+  function($scope, $http, $filter, $anchorScroll,
+    $location, DataService, StorageService) {
+    var vm = this;
 
     $scope.columns = {'test': 1};
     $scope.data = [{'test': 1}];
@@ -27,6 +29,10 @@ myApp.controller('DataCtrl',
         isopensum: false
     };
 
+    DataService.getData(2013).then(function(data) {
+        $scope.data = JSON.parse(data);
+    });
+
     $http.get('datasets/column-defs.json').then(function(response){
         $scope.columns = response.data.cols;
     }, function(err){
@@ -39,14 +45,14 @@ myApp.controller('DataCtrl',
         throw err;
     });
 
-    $http.get('/api/v1/schools?year=2013&order=grad6').success(function(data){
-        $scope.data = data;
-        $scope.selectedPoint = $scope.data.filter(function(d){
-            return d.instnm == 'University of Nebraska at Omaha';
-        })[0];
-    }).error(function(error){
-        throw error;
-    });
+    // $http.get('/api/v1/schools?year=2013').success(function(data){
+    //     $scope.data = data;
+    //     $scope.selectedPoint = $scope.data.filter(function(d){
+    //         return d.instnm == 'University of Nebraska at Omaha';
+    //     })[0];
+    // }).error(function(error){
+    //     throw error;
+    // });
 
 
     $scope.loadYear = function(year){

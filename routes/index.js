@@ -1,5 +1,4 @@
 var express = require('express');
-var path = require('path');
 var router = express.Router();
 var pg = require('pg');
 var keenIO = require('keen.io');
@@ -16,20 +15,14 @@ var keen = keenIO.configure({
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render(path.join(__dirname, '../views', '/pages/index.ejs'));
-    keen.addEvent('hit', {ip_add: req.ip},
-        function (err) {
-            if (err){
-                console.log(err);
-            }
-        });
+    res.sendFile('index.html');
+    keen.addEvent('hit', {ip_add: req.ip});
 });
 
 
 router.get('/api/v1/schools', function (req, res) {
     var results = [];
     var year = req.query.year;
-    var order = req.query.order;
     var queryString;
 
     //validate Data
@@ -48,10 +41,10 @@ router.get('/api/v1/schools', function (req, res) {
     }
 
     keen.addEvent('db_access',
-            {ip_add: req.ip, year: year, order_by: order},
+            {ip_add: req.ip, year: year},
             function (err) {
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                 }
             });
 
@@ -72,7 +65,7 @@ router.get('/api/v1/schools', function (req, res) {
 
         // Handle Errors
         if (err) {
-            process.stderr.write(err);
+            //process.stderr.write(err);
         }
 
     });

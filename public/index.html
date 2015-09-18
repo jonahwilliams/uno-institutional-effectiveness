@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Data Dashboard</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/db-scatter.css" />
+   <!--Angular -->
+  <script src="/lib/angular/angular.min.js"></script>
+  <script src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+   <!--D3 -->
+  <script src="/lib/d3/d3.js" charset="utf-8"></script>
+
+  <!--myApp-->
+  <script src="/js/app.js"></script>
+  <script src="/js/controllers.js"></script>
+  <script src="/js/directives.js"></script>
+  <script src="/js/filters.js"></script>
+  <script src="/js/services/dataservice.js"></script>
+  <script src="/js/services/storageservice.js"></script>
+
+  <!--Tooltip-->
+  <script src="/lib/d3.tip.v0.6.3.js"></script>
+
+  <!--Loading Bar-->
+  <link rel='stylesheet' href='/lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+  <script type='text/javascript' src='/lib/angular-loading-bar/build/loading-bar.min.js'></script>
+</head>
+<body ng-app="myApp" ng-controller="DataCtrl" id="scrollArea">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false"
+          ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="">Institutional Effectiveness</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" collapse="isCollapsed">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="##h1">Graph</a></li>
+        <li><a href="##h2">Summary</a></li>
+        <li><a href="##h3">Variables</a></li>
+        <li><a href="##h4">Credits</a></li>
+        <li><a href="##h5">Comments</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" id="h1">
+        <div id="scater-loc">
+          <scatter-plot data="data"
+            columns="columns"
+            selected-point="selectedPoint"
+            accessor-x="params.xcol"
+            accessor-y="params.ycol"
+            use-peers="params.usePeers"
+            custom-peer="params.customPeer">
+          </scatter-plot>
+        </div>
+      </div>
+     <div class="col-xs-12 col-sm-10 col-md-5 col-lg-5">
+       <tabset justified="true">
+        <tab heading="Tools">
+           <div class="row">
+             <div class="panel panel-default">
+                <div class="panel-body">
+                  <h3 class="school-name">{{selectedPoint.instnm}}<br/ >
+                   <small>{{params.year}}</small></h3>
+                   <table class="table table-striped table-condensed">
+                      <tr ng-repeat="(key, value) in selectedPoint | columnFilter: params.ycol: params.xcol">
+                        <td>{{key | nameFilter:columns}}</td>
+                        <td>{{value | unitFilter: key: columns}}</td>
+                      </tr>
+                      <tr>
+                        <td> Undergraduate Headcount </td>
+                        <td> {{selectedPoint.headcount }} </td>
+                      </tr>
+                   </table>
+                 </div>
+               </div>
+            </div>
+            <div class="row">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="btn-group" dropdown is-open="status.isopenx">
+                    <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                      Resource<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+                      <li>
+                        <a ng-click="params.xcol = 'employees'">
+                          Employees
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'admins'">
+                          Administration
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'instructors'">
+                          Instructors
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'totalsal'">
+                          Total Salary
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'adminsal'">
+                          Admin Salary
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'instsal'">
+                          Instructor Salary
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'asalpm'">
+                          Administration Salary per Million
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'isalpm'">
+                          Instructor Salary per Million
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'adpts'">
+                          Admin per Thousand Students
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.xcol = 'inspts'">
+                          Instructors per Thousand Students
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="btn-group" dropdown is-open="status.isopeny">
+                    <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                      Performance<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+                      <li>
+                        <a ng-click="params.ycol = 'schps'">
+                          Average SCH per Student per AOI
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.ycol = 'grad4'">
+                          Graduation Rate (4 year)
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.ycol = 'grad6'">
+                         Graduation Rate (6 year)
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="params.ycol = 'degpts'">
+                          Bachelor's Degrees per Thousand Students
+                        </a>
+                      </li>
+                       <li>
+                        <a ng-click="params.ycol = 'defrate'">
+                          Student Loan Default Rate
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="btn-group" dropdown is-open="status.isopenyear">
+                    <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                      Year<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+                      <li>
+                        <a ng-click="loadYear(2012)">
+                          2012
+                        </a>
+                      </li>
+                      <li>
+                        <a ng-click="loadYear(2013)">
+                          2013
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="btn-group dropup" dropdown is-open="status.isopenpeer">
+                    <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                      Peer Groups<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu"
+                      role="menu" aria-labelledby="single-button-4">
+                      <li ng-repeat="peer in params.peers">
+                        <a ng-click="loadPeer(peer.d)">{{peer.n}}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+
+
+                 </div>
+               </div>
+            </div>
+            <div class="row">
+              <div class="panel panel-default">
+                 <div class="panel-body">
+                  <input type="text" ng-model="selectedSchool"
+                  placeholder="Type Reference School Name"
+                  typeahead="school as school.instnm for school in data | filter:$viewValue | limitTo: 30"
+                  typeahead-on-select='onSelect($item, $model, $label)'
+                  class="form-control">
+                 </div>
+               </div>
+            </div>
+
+             <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <button type="button" class="btn btn-primary"
+                       ng-model="params.usePeers"
+                       btn-checkbox btn-checkbox-true="true"
+                       btn-checkbox-false="false">Filter
+                    </button>
+
+                    <button class='btn btn-primary' ng-click="addToPeer()">Add Peer</button>
+                    <button class="btn btn-danger" ng-click="resetPeer()">Reset Custom</button>
+                  </div>
+                </div>
+             </div>
+            <div class="row">
+                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+             </div>
+          </tab>
+           <tab heading="Data">
+             <h3 class="school-name">{{selectedPoint.instnm}}<br/ >
+                   <small>{{params.year}}</small></h3>
+             <table class="table table-striped table-condensed">
+               <tr ng-repeat="(key, value) in getDataCol(selectedPoint)">
+                <td>{{key | nameFilter:columns}}</td>
+                <td>{{value | unitFilter: key: columns}}</td>
+               </tr>
+            </table>
+          </tab>
+        </tabset>
+   </div>
+ </div>
+
+ <div class="row">
+      <hr id="h2" />
+      <div class="col-md-12">
+         <h2>Peer Analysis</h2>
+         <div ng-show="params.usePeers == 1">
+         <div>
+           <div class="btn-group" dropdown is-open="status.isopensum">
+             <button id="single-button-1" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+               Peer Index<span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu" role="menu" aria-labelledby="single-button-1">
+               <li>
+                 <a ng-click="params.sortCol = 'schps'">
+                   SCH per Student
+                 </a>
+               </li>
+               <li>
+                 <a ng-click="params.sortCol = 'grad4'">
+                   Graduation Rate (4 year)
+                 </a>
+               </li>
+               <li>
+                 <a ng-click="params.sortCol = 'grad6'">
+                  Graduation Rate (6 year)
+                 </a>
+               </li>
+               <li>
+                 <a ng-click="params.sortCol = 'degpts'">
+                   Bachelor's Degrees per Thousand Students
+                 </a>
+               </li>
+               <li>
+                 <a ng-click="params.sortCol = 'defrate'">
+                   Student Loan Default Rate
+                 </a>
+               </li>
+             </ul>
+           </div>
+             <br />
+             <tabset justified="true">
+                    <tab heading="All">
+                 <sortable-table data="data"
+                   custom-peer="params.customPeer"
+                   sort-col="params.sortCol"
+                   columns="columns">
+                 </sortable-table>
+               </tab>
+               <tab heading="Summary">
+                 <summary-table data="data"
+                   custom-peer="params.customPeer"
+                   sort-col="params.sortCol"
+                   columns="columns">
+                 </summary-table>
+                </tab>
+            </tabset>
+         </div>
+
+         </div>
+         <div ng-show="params.usePeers == 0">
+            <h4>Select a peer group to display the analysis table</h4>
+         </div>
+     </div>
+ </div>
+
+<br>
+<br>
+<br>
+  <div class="row">
+      <hr id="h3"></hr>
+      <div class="col-md-10 col-md-offset-1">
+         <h2>Variable Definitions</h2>
+         <table class="table table-stripped">
+         	<tr ng-repeat="item in columns">
+         		<td>{{item.n}}</td>
+         		<td>{{item.d}}</td>
+         	</tr>
+         </table>
+      </div>
+   </div>
+
+
+   <div class="row">
+      <hr id="h4"/>
+      <div class="col-md-10 col-md-offset-1">
+      <h2>Credits</h2>
+        <div class="col-md-8 col-md-offset-2">
+          <table class="table table-striped table-compact">
+            <tbody>
+          	<tr>
+          		<td>T. Hank Robinson-Ph.D</td>
+          		<td>Producer, Research, Design</td>
+          	</tr>
+          	<tr>
+          		<td>Jonah Williams</td>
+          		<td>Development and Design</td>
+          	</tr>
+          	<tr>
+          		<td>Jenny Liu-Ph.D</td>
+          		<td>Research and Design</td>
+          	</tr>
+          	<tr>
+          		<td>Byungwoo Shine Cho</td>
+          		<td>Research and Design</td>
+          	</tr>
+          	<tr>
+          		<td>Mahbubul Majumder-Ph.D</td>
+          		<td>Design</td>
+          	</tr>
+            </tbody>
+          </table>
+         </div>
+      </div>
+   </div>
+
+
+   <div class="row">
+      <hr id="h5"/>
+      <div class="col-md-10 col-md-offset-1">
+      <h2>Comments</h2>
+        <div class="col-md-10 col-md-offset-1">
+           <div id="disqus_thread"></div>
+              <script type="text/javascript">
+               /* * * CONFIGURATION VARIABLES * * */
+                var disqus_shortname = 'dataoger';
+
+                  /* * * DON'T EDIT BELOW THIS LINE * * */
+                  (function() {
+                      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+              </script>
+              <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+        </div>
+      </div>
+   </div>
+</div>
+</body>
+</html>
