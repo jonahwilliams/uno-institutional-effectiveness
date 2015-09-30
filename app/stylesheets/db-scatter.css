@@ -36,9 +36,7 @@
 }
 
 body {
-    padding-top: 70px;
-    background-image: url('/uno-logo.png');
-
+    padding-top: 30px;
 }
 
 #scrollArea {
@@ -50,6 +48,5 @@ body {
   }
 
 .navbar {
-  background-image: url('/uno-logo.png');
-  height: 40px;
+  height: 30px;
 }

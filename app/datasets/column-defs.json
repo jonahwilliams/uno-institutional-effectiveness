@@ -82,8 +82,8 @@
         },
         "schps": {
             "u": "n",
-            "n": "Average SCH per Student per AOI",
-            "d": "Students Credit Hours per student for academic year 2013"
+            "n": "Average SCH per Student per AY",
+            "d": "Students Credit Hours per student for academic year"
         }
     }
 }
