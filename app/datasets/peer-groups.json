@@ -24,38 +24,6 @@
 		"Wichita State University"
 		]
  },
- {
-	 "n": "UNL Peers", "d":
-	 	[
-			"University of Nebraska-Lincoln",
-			"Colorado State University-Fort Collins",
-			"Iowa State University",
-			"Ohio State University-Main Campus",
-			"Purdue University-Main Campus",
-			"University of Colorado Boulder",
-			"University of Iowa",
-			"University of Illinois at Urbana-Champaign",
-			"University of Kansas",
-			"University of Minnesota-Twin Cities",
-			"University of Missouri-Columbia"
-		 ]
- },
- {
-	 "n": "UNK Peers", "d":
-	 [
-		"University of Nebraska at Kearney",
-		"University of Central Missouri",
-		"Minnesota State University-Moorhead",
-		"Murray State University",
-		"Northern Michigan University",
-		"Sam Houston State University",
-		"University of Central Arkansas",
-		"University of Northern Iowa",
-		"University of Wisconsin-Stevens Point",
-		"Western Illinois University",
-		"University of Northern Colorado"
-	 ]
- },
   {"n":"RU/VH","d": [
         "University of Alabama at Birmingham",
         "University of Alabama in Huntsville",

@@ -256,8 +256,8 @@ myApp.directive('sortableTable', function($filter){
         .attr('class','sortable-table');
 
       var cols = [
-          'instnm', 'admins', 'instructors',
-          'headcount', 'asalpm',
+          'instnm', 'headcount', 'admins', 'instructors',
+          'asalpm',
           'isalpm', 'adpts','inspts', 'grad4',
           'grad6','degpts','schps','defrate'
       ];
@@ -375,8 +375,8 @@ myApp.directive('summaryTable', function($filter){
         .attr('class','ssummary-table');
 
         var cols = [
-            'instnm', 'admins', 'instructors',
-            'headcount', 'asalpm',
+            'instnm', 'headcount', 'admins', 'instructors',
+            'asalpm',
             'isalpm', 'adpts','inspts', 'grad4',
             'grad6','degpts','schps','defrate'
         ];
@@ -434,9 +434,18 @@ myApp.directive('summaryTable', function($filter){
         }
 
         for (var i = 1; i < cols.length; i++){
-            lower_data[cols[i]] = lower_data[cols[i]].reduce(function(a, b){ return a + b}) / (lower_data[cols[i]].length - 1);
-            middle_data[cols[i]] =  middle_data[cols[i]].reduce(function(a, b){ return a + b}) / (middle_data[cols[i]].length - 1);
-            upper_data[cols[i]] =  upper_data[cols[i]].reduce(function(a, b){ return a + b}) / (upper_data[cols[i]].length - 1);
+            lower_data[cols[i]] = lower_data[cols[i]]
+              .reduce(function(a, b) {
+                return a + b;
+            }) / (lower_data[cols[i]].length - 1);
+            middle_data[cols[i]] =  middle_data[cols[i]]
+              .reduce(function(a, b) {
+                return a + b;
+            }) / (middle_data[cols[i]].length - 1);
+            upper_data[cols[i]] =  upper_data[cols[i]]
+              .reduce(function(a, b) {
+                return a + b;
+            }) / (upper_data[cols[i]].length - 1);
         }
 
         data = [upper_data, middle_data, lower_data];

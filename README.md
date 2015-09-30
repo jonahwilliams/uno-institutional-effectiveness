@@ -39,13 +39,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 ```
 
-This is the part where we initalize our ejs parser. THIS IS BAD!  Since we are using angular now we really don't 
-need html templating for our app.
-```javascript
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-```
 
 Here we tell the app about the specifc routes for our api and static file server, and listen to the correct port.
 I used 8080 for testing, but you should always use the enviornment variable port for production.
